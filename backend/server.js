@@ -1,22 +1,22 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import todos from './data/todos.js'
+import connectDB from './config/db.js'
+
+import todoRoutes from './routes/todoRoutes.js'
+
 
 dotenv.config()
+
+connectDB()
+
 const app=express()
 
 app.get('/',(req,res)=>{
     res.send('api is running')
 })
 
-app.get('/api/todos',(req,res)=>{
-    res.json(todos)
-})
+app.use('/api/todos',todoRoutes)
 
-app.get('/api/todos/:id', (req,res)=>{
-    const todo = todos.find((t)=> t._id === req.params.id)
-    res.json(todo)
-})
 
 const PORT = process.env.PORT || 5000
 
