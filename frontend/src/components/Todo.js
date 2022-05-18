@@ -5,7 +5,7 @@ const Todo = ({ todo }) => {
   return (
     <>
       <form>
-        <input type='text' placeholder={todo.name} />
+        <input type='text' value={todo.name} />
         <Link to='/status'>
           <button>{todo.status}</button>
         </Link>
