@@ -19,8 +19,8 @@ const importData = async () => {
 
     const mainUser = createdUsers[0]._id
 
-    const todosWithUserId = todos.map((todo)=>{
-        return { ...todo, user:mainUser}
+    const todosWithUserId = todos.map((todo) => {
+      return { ...todo, user: mainUser }
     })
 
     await Todo.insertMany(todosWithUserId)

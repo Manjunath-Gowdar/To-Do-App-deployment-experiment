@@ -20,4 +20,4 @@ const todos = [
     status: 'false',
   },
 ]
- export default todos
+export default todos

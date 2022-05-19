@@ -18,9 +18,10 @@ export const listTodos = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: TODO_LIST_FAIL,
-      payload: error.response && error.response.data.message
-      ? error.response.data.message
-      : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     })
   }
 }
