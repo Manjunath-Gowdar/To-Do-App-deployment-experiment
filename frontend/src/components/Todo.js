@@ -7,10 +7,13 @@ const Todo = ({ todo }) => {
       <form>
         <input type='text' value={todo.name} />
         <Link to='/status'>
-          <button>{todo.status}</button>
+          <button>edit</button>
         </Link>
         <Link to='/edit'>
-          <button>edit</button>
+          <button>finished</button>
+        </Link>
+        <Link to='/remove'>
+          <button>remove</button>
         </Link>
       </form>
     </>
