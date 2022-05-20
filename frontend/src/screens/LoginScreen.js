@@ -24,6 +24,12 @@ const LoginScreen = () => {
     dispatch(login(email, password))
     navigate('/')
   }
+
+  const handleButtonClick = (e) => {
+    e.preventDefault()
+    navigate('/register')
+  }
+
   return (
     <div>
       <h1>Sign In</h1>
@@ -52,6 +58,9 @@ const LoginScreen = () => {
 
         <input type='submit' value='submit' />
       </form>
+
+      <h4>Have an account ?</h4>
+      <button onClick={handleButtonClick}>REGISTER</button>
     </div>
   )
 }
