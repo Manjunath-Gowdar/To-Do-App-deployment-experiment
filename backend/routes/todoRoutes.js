@@ -1,9 +1,9 @@
 import express from 'express'
-import { getTodoById, getTodos } from '../controllers/todoController.js'
+import { getTodoByUserId, getTodos } from '../controllers/todoController.js'
 
 const router = express.Router()
 
 router.route('/').get(getTodos)
-router.route('/:id').get(getTodoById)
+router.route('/:id').get(getTodoByUserId)
 
 export default router

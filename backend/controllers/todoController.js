@@ -8,9 +8,9 @@ const getTodos = asyncHandler(async (req, res) => {
 })
 
 // fetch single todos from './api/todos/id' as public route
-const getTodoById = asyncHandler(async (req, res) => {
-  const todo = await Todo.findById(req.params.id)
+const getTodoByUserId = asyncHandler(async (req, res) => {
 
+  const todo = await Todo.find({user:req.params.id})
   if (todo) {
     res.json(todo)
   } else {
@@ -19,4 +19,4 @@ const getTodoById = asyncHandler(async (req, res) => {
   }
 })
 
-export { getTodos, getTodoById }
+export { getTodos, getTodoByUserId }
