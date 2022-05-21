@@ -7,10 +7,6 @@ const todoSchema = mongoose.Schema(
       required: true,
       ref: 'User',
     },
-    number: {
-      type: Number,
-      required: true,
-    },
     name: {
       type: String,
       required: true,

@@ -9,8 +9,7 @@ const getTodos = asyncHandler(async (req, res) => {
 
 // fetch single todos from './api/todos/id' as public route
 const getTodoByUserId = asyncHandler(async (req, res) => {
-
-  const todo = await Todo.find({user:req.params.id})
+  const todo = await Todo.find({ user: req.params.id })
   if (todo) {
     res.json(todo)
   } else {
@@ -19,4 +18,20 @@ const getTodoByUserId = asyncHandler(async (req, res) => {
   }
 })
 
-export { getTodos, getTodoByUserId }
+// update todo from '/api/todos/edit/todoId' as private route
+const updateTodo = asyncHandler(async (req, res) => {
+  const todo = await Todo.findById(req.params.todoId)
+  if (todo) {
+    ;(todo.user = todo.user),
+      (todo.name = req.body.updatedTodo),
+      (todo.status = todo.status)
+
+    const latestTodo = await todo.save()
+    res.json(latestTodo)
+  } else {
+    res.status(404)
+    throw new Error('Todo not found')
+  }
+})
+
+export { getTodos, getTodoByUserId, updateTodo }

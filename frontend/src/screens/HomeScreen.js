@@ -12,7 +12,6 @@ const HomeScreen = () => {
   useEffect(() => {
     dispatch(listTodos())
   }, [dispatch])
-
   return (
     <>
       <h1>WELCOME</h1>

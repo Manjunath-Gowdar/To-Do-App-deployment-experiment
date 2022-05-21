@@ -5,11 +5,10 @@ const Todo = ({ todo }) => {
   return (
     <>
       <form>
-        <input type='text' value={todo.name} />
-        <Link to='/status'>
-          <button>edit</button>
+        <Link to={`/edit/${todo._id}/${todo.name}`}>
+          <input type='text' value={todo.name} />
         </Link>
-        <Link to='/edit'>
+        <Link to='/status'>
           <button>finished</button>
         </Link>
         <Link to='/remove'>
