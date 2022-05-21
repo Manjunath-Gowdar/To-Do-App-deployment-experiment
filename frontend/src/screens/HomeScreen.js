@@ -1,34 +1,46 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Todo from '../components/Todo'
 import { useSelector, useDispatch } from 'react-redux'
-import { listTodos } from '../actions/todoAction.js'
+import { userListTodos } from '../actions/todoAction.js'
 
 const HomeScreen = () => {
   const dispatch = useDispatch()
 
-  const todoList = useSelector((state) => state.todoList)
-  const { loading, error, todos } = todoList
+  const { userInfo } = useSelector((state) => state.userLogin)
 
-  useEffect(() => {
-    dispatch(listTodos())
-  }, [dispatch])
+  const todoUserList = useSelector((state) => state.todoUserList)
+  const { loading, error, userTodos } = todoUserList
+
+  const handleClick = () => {
+    dispatch(userListTodos(userInfo._id))
+  }
+
   return (
     <>
-      <h1>WELCOME</h1>
-      <h1>My To-Do List</h1>
+      {userInfo && (
+        <>
+          <h2>Welcome {userInfo.name}</h2>
+          <button onClick={handleClick}>Show All My Todos</button>
+          <br />
+          <span style={{ paddingTop: '20px' }}>&nbsp; </span>
+        </>
+      )}
+      {!userInfo && <h1>Login To see your To-do's</h1>}
       {loading ? (
         <h2>Loading...</h2>
       ) : error ? (
         <h3>{error}</h3>
-      ) : (
+      ) : userTodos ? (
         <>
-          {todos.map((todo) => (
+          {userTodos.map((todo) => (
             <span key={todo._id}>
               <Todo todo={todo} />
               <br />
             </span>
           ))}
         </>
+      ) : (
+        <></>
       )}
     </>
   )

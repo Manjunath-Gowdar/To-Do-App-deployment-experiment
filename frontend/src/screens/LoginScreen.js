@@ -19,14 +19,12 @@ const LoginScreen = () => {
     }
   }, [navigate, userInfo])
 
-  const submitHandler = (e) => {
-    e.preventDefault()
+  const submitHandler = () => {
     dispatch(login(email, password))
-    navigate('/')
+    navigate('/home')
   }
 
-  const handleButtonClick = (e) => {
-    e.preventDefault()
+  const handleButtonClick = () => {
     navigate('/register')
   }
 
@@ -36,7 +34,7 @@ const LoginScreen = () => {
       {error && <h3>{error}</h3>}
       {loading && <h2>LOADING..</h2>}
       <form onSubmit={submitHandler}>
-        <label for='email'>Enter your Email</label>
+        <label htmlFor='email'>Enter your Email</label>
         <br />
         <input
           type='text'
@@ -46,7 +44,7 @@ const LoginScreen = () => {
         />
         <br />
 
-        <label for='password'>Enter your password</label>
+        <label htmlFor='password'>Enter your password</label>
         <br />
         <input
           type='text'
@@ -59,7 +57,7 @@ const LoginScreen = () => {
         <input type='submit' value='submit' />
       </form>
 
-      <h4>Have an account ?</h4>
+      <h4>Don't Have An Account?</h4>
       <button onClick={handleButtonClick}>REGISTER</button>
     </div>
   )

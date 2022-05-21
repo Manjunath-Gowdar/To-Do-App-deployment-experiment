@@ -6,6 +6,9 @@ import {
   TODO_UPDATE_REQUEST,
   TODO_UPDATE_SUCCESS,
   TODO_UPDATE_FAIL,
+  TODO_USER_LIST_REQUEST,
+  TODO_USER_LIST_SUCCESS,
+  TODO_USER_LIST_FAIL,
 } from '../constants/todoConstant'
 
 export const listTodos = () => async (dispatch) => {
@@ -29,7 +32,28 @@ export const listTodos = () => async (dispatch) => {
   }
 }
 
-export const updateTodo = (data) => async (dispatch, getState) => {
+export const userListTodos = (dataOne) => async (dispatch) => {
+  try {
+    dispatch({ type: TODO_USER_LIST_REQUEST })
+
+    const { data } = await axios.get(`/api/todos/${dataOne}`)
+
+    dispatch({
+      type: TODO_USER_LIST_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: TODO_USER_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const updateTodo = (data) => async (dispatch) => {
   try {
     dispatch({
       type: TODO_UPDATE_REQUEST,

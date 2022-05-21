@@ -6,7 +6,7 @@ const Todo = ({ todo }) => {
     <>
       <form>
         <Link to={`/edit/${todo._id}/${todo.name}`}>
-          <input type='text' value={todo.name} />
+          <input type='text' placeholder={todo.name} />
         </Link>
         <Link to='/status'>
           <button>finished</button>

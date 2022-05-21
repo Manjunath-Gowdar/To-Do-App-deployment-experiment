@@ -2,16 +2,18 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../actions/userAction'
+import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
+  const navigate = useNavigate()
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
   const dispatch = useDispatch()
 
-  const logoutHandler = (e) => {
-    e.preventDefault()
+  const logoutHandler = () => {
     dispatch(logout())
+    navigate('/login')
   }
 
   return (
@@ -22,8 +24,6 @@ const Header = () => {
         </Link>
         {userInfo ? (
           <>
-            {/* <Link to='/profile'>Profile</Link> */}
-
             <button style={{ marginLeft: '20px' }} onClick={logoutHandler}>
               Logout
             </button>

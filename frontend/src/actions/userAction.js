@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { TODO_USER_LIST_RESET } from '../constants/todoConstant'
 import {
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
@@ -8,7 +9,7 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
 } from '../constants/userConstants'
-
+// import {useNavigate} from 'react-router-dom'
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({
@@ -46,6 +47,7 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')
+  dispatch({ type: TODO_USER_LIST_RESET })
   dispatch({ type: USER_LOGOUT })
 }
 
