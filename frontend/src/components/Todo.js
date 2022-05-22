@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
@@ -6,6 +6,16 @@ import { userListTodos } from '../actions/todoAction'
 
 const Todo = ({ todo }) => {
   const dispatch = useDispatch()
+
+  const [currentStatus,setCurrentStatus] = useState(todo.status)
+  const handleStatus=(e)=>{
+    e.preventDefault()
+    console.log('todo')
+    console.log(!currentStatus)
+    // setCurrentStatus(!currentStatus)
+    axios.get(`/api/todos/status/${todo._id}/${!currentStatus}`)
+    dispatch(userListTodos(todo.user))
+  }
 
   const handleRemove = (e) => {
     e.preventDefault()
@@ -20,12 +30,10 @@ const Todo = ({ todo }) => {
         <Link to={`/edit/${todo._id}/${todo.name}`}>
           <input type='text' placeholder={todo.name} />
         </Link>
-        <Link to='/status'>
-          <button>finished</button>
-        </Link>
-        <button type='submit' onClick={handleRemove}>
+          <button type='submit' onClick={handleStatus} >{todo.status ? <span>true</span>:<span>false</span>}</button>
+          <button type='submit' onClick={handleRemove}>
           remove
-        </button>
+          </button>
       </form>
     </>
   )

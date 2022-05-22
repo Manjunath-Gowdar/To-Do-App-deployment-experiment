@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <header>
       <nav>
-        <Link to='/home' style={{ paddingRight: '20px' }}>
+        <Link to='/' style={{ paddingRight: '20px' }}>
           HOME
         </Link>
         {userInfo ? (

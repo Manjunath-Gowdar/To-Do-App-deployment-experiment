@@ -22,10 +22,9 @@ const getTodoByUserId = asyncHandler(async (req, res) => {
 const updateTodo = asyncHandler(async (req, res) => {
   const todo = await Todo.findById(req.params.todoId)
   if (todo) {
-    ;(todo.user = todo.user),
-      (todo.name = req.body.updatedTodo),
-      (todo.status = todo.status)
-
+    todo.user = todo.user
+    todo.name = req.body.updatedTodo
+    todo.status = todo.status
     const latestTodo = await todo.save()
     res.json(latestTodo)
   } else {
@@ -65,4 +64,18 @@ const deleteTodo = asyncHandler(async (req, res) => {
   await Todo.deleteOne({ _id: req.params.todoId })
 })
 
-export { getTodos, getTodoByUserId, updateTodo, createTodo, deleteTodo }
+// update todo status from '/api/todos/:todoId/:status' as public route
+const updateTodoStatus = asyncHandler(async (req, res) => {
+  const todo  = await Todo.findById(req.params.todoId)
+  if (todo) {
+    todo.user = todo.user
+    todo.name = todo.name 
+    todo.status = req.params.status
+    await todo.save()
+  } else {
+    res.status(404)
+    throw new Error('Unable to update status of todo')
+  }
+})
+
+export { getTodos, getTodoByUserId, updateTodo, createTodo, deleteTodo, updateTodoStatus }

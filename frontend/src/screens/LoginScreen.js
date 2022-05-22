@@ -21,7 +21,7 @@ const LoginScreen = () => {
 
   const submitHandler = () => {
     dispatch(login(email, password))
-    navigate('/home')
+    navigate('/')
   }
 
   const handleButtonClick = () => {

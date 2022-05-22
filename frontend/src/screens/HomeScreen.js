@@ -5,14 +5,20 @@ import { userListTodos, newTodoAction } from '../actions/todoAction.js'
 
 const HomeScreen = () => {
   const [newTodo, setNewTodo] = useState('')
+  // const [show,setShow] =useState(false)
   const dispatch = useDispatch()
 
   const { userInfo } = useSelector((state) => state.userLogin)
 
   const todoUserList = useSelector((state) => state.todoUserList)
   const { loading, error, userTodos } = todoUserList
+  
+  // if(userTodos.length === 0){
+  //   setShow(true)
+  // }
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault()
     dispatch(userListTodos(userInfo._id))
   }
 
@@ -20,7 +26,8 @@ const HomeScreen = () => {
     e.preventDefault()
     dispatch(newTodoAction({ userId: userInfo._id, todoText: newTodo }))
     dispatch(userListTodos(userInfo._id))
-    console.log('todo added')
+    
+    dispatch(userListTodos(userInfo._id))
   }
 
   return (
@@ -33,6 +40,24 @@ const HomeScreen = () => {
           <span style={{ paddingTop: '20px' }}>&nbsp; </span>
         </>
       )}
+      {/* {show && (
+        <>
+          <div>
+            <input
+              type='text'
+              id='newTodo'
+              name='newTodo'
+              placeholder='Add New Todo'
+              onChange={(e) => {
+                setNewTodo(e.target.value)
+              }}
+            />
+            <button type='submit' onClick={handleNewTodo}>
+              Add Todo
+            </button>
+          </div>
+        </>
+      )} */}
       {!userInfo && <h1>Login To see your To-do's</h1>}
       {loading ? (
         <h2>Loading...</h2>
@@ -51,7 +76,7 @@ const HomeScreen = () => {
               }}
             />
             <button type='submit' onClick={handleNewTodo}>
-              Add Todo{' '}
+              Add Todo
             </button>
           </div>
           <br />

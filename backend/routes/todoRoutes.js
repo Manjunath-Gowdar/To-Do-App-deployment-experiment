@@ -5,8 +5,8 @@ import {
   updateTodo,
   createTodo,
   deleteTodo,
+  updateTodoStatus,
 } from '../controllers/todoController.js'
-import { protect } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
 
@@ -15,5 +15,7 @@ router.route('/:id').get(getTodoByUserId)
 router.route('/edit/:todoId').put(updateTodo)
 router.route('/:userId/:todoText').get(createTodo)
 router.route('/delete/:todoId').delete(deleteTodo)
+router.route('/status/:todoId/:status').get(updateTodoStatus)
+
 
 export default router
