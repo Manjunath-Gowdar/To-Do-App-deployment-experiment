@@ -7,7 +7,7 @@ const getTodos = asyncHandler(async (req, res) => {
   res.json(todos)
 })
 
-// fetch single todos from './api/todos/id' as public route
+// fetch todos of logedin user from  './api/todos/id' as public route
 const getTodoByUserId = asyncHandler(async (req, res) => {
   const todo = await Todo.find({ user: req.params.id })
   if (todo) {
@@ -34,4 +34,30 @@ const updateTodo = asyncHandler(async (req, res) => {
   }
 })
 
-export { getTodos, getTodoByUserId, updateTodo }
+// create todo from '/api/todos/:userId/:todoText' as private route
+const createTodo = asyncHandler(async (req, res) => {
+  const todoExists = await Todo.find({ user: req.params.userId })
+    .where('name')
+    .equals(req.params.todoText)
+
+  if (todoExists.length >= 1) {
+    res.status(400)
+    throw new Error('Todo already exists for this user')
+  }
+
+  const todo = await Todo.create({
+    user: req.params.userId,
+    name: req.params.todoText,
+  })
+
+  if (todo) {
+    res.status(201).json({
+      _id: todo._id,
+      user: todo.user,
+      name: todo.name,
+      status: todo.status,
+    })
+  }
+})
+
+export { getTodos, getTodoByUserId, updateTodo, createTodo }

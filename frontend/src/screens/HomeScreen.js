@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Todo from '../components/Todo'
 import { useSelector, useDispatch } from 'react-redux'
-import { userListTodos } from '../actions/todoAction.js'
+import { userListTodos, newTodoAction } from '../actions/todoAction.js'
 
 const HomeScreen = () => {
+  const [newTodo, setNewTodo] = useState('')
   const dispatch = useDispatch()
 
   const { userInfo } = useSelector((state) => state.userLogin)
@@ -13,6 +14,13 @@ const HomeScreen = () => {
 
   const handleClick = () => {
     dispatch(userListTodos(userInfo._id))
+  }
+
+  const handleNewTodo = (e) => {
+    e.preventDefault()
+    dispatch(newTodoAction({ userId: userInfo._id, todoText: newTodo }))
+    dispatch(userListTodos(userInfo._id))
+    console.log('todo added')
   }
 
   return (
@@ -32,6 +40,21 @@ const HomeScreen = () => {
         <h3>{error}</h3>
       ) : userTodos ? (
         <>
+          <div>
+            <input
+              type='text'
+              id='newTodo'
+              name='newTodo'
+              placeholder='Add New Todo'
+              onChange={(e) => {
+                setNewTodo(e.target.value)
+              }}
+            />
+            <button type='submit' onClick={handleNewTodo}>
+              Add Todo{' '}
+            </button>
+          </div>
+          <br />
           {userTodos.map((todo) => (
             <span key={todo._id}>
               <Todo todo={todo} />

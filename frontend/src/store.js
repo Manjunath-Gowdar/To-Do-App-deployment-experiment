@@ -3,6 +3,7 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import {
   todoListReducer,
+  todoNewReducer,
   todoUpdateReducer,
   todoUserListReducer,
 } from './reducers/todoReducers'
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   todoUpdate: todoUpdateReducer,
   todoUserList: todoUserListReducer,
+  todoNew: todoNewReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

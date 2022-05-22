@@ -10,6 +10,9 @@ import {
   TODO_USER_LIST_SUCCESS,
   TODO_USER_LIST_FAIL,
   TODO_USER_LIST_RESET,
+  TODO_NEW_REQUEST,
+  TODO_NEW_SUCCESS,
+  TODO_NEW_FAIL,
 } from '../constants/todoConstant'
 
 export const todoListReducer = (state = { todos: [] }, action) => {
@@ -49,6 +52,19 @@ export const todoUpdateReducer = (state = { todos: [] }, action) => {
     case TODO_UPDATE_SUCCESS:
       return { loading: false, todos: action.payload }
     case TODO_UPDATE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const todoNewReducer = (state = { }, action) => {
+  switch (action.type) {
+    case TODO_NEW_REQUEST:
+      return { loading: true, }
+    case TODO_NEW_SUCCESS:
+      return { loading: false, newTodo: action.payload }
+    case TODO_NEW_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state
