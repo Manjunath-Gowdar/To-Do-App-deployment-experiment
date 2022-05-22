@@ -60,4 +60,9 @@ const createTodo = asyncHandler(async (req, res) => {
   }
 })
 
-export { getTodos, getTodoByUserId, updateTodo, createTodo }
+// delete todo from '/api/todos/delete/:todoId' as public route
+const deleteTodo = asyncHandler(async (req, res) => {
+  await Todo.deleteOne({ _id: req.params.todoId })
+})
+
+export { getTodos, getTodoByUserId, updateTodo, createTodo, deleteTodo }

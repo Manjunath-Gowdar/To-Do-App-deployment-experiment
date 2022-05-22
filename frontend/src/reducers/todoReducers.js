@@ -58,10 +58,10 @@ export const todoUpdateReducer = (state = { todos: [] }, action) => {
   }
 }
 
-export const todoNewReducer = (state = { }, action) => {
+export const todoNewReducer = (state = {}, action) => {
   switch (action.type) {
     case TODO_NEW_REQUEST:
-      return { loading: true, }
+      return { loading: true }
     case TODO_NEW_SUCCESS:
       return { loading: false, newTodo: action.payload }
     case TODO_NEW_FAIL:
