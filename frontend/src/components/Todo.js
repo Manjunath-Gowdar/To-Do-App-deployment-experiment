@@ -7,12 +7,9 @@ import { userListTodos } from '../actions/todoAction'
 const Todo = ({ todo }) => {
   const dispatch = useDispatch()
 
-  const [currentStatus,setCurrentStatus] = useState(todo.status)
+  const [currentStatus] = useState(todo.status)
   const handleStatus=(e)=>{
     e.preventDefault()
-    console.log('todo')
-    console.log(!currentStatus)
-    // setCurrentStatus(!currentStatus)
     axios.get(`/api/todos/status/${todo._id}/${!currentStatus}`)
     dispatch(userListTodos(todo.user))
   }
