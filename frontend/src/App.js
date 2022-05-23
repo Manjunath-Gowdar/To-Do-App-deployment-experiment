@@ -6,7 +6,6 @@ import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import Edit from './components/Edit'
-import Test from './components/Test'
 
 const App = () => {
   return (
@@ -16,7 +15,6 @@ const App = () => {
         <main>
           <Routes>
             <Route path='/' element={<HomeScreen />} />
-            <Route path='/test' element={<Test/>} />
             <Route path='/login' element={<LoginScreen />} />
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/edit/:todoId/:todo' element={<Edit />} />
