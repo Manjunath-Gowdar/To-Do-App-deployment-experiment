@@ -16,6 +16,8 @@ app.use('/api/todos', todoRoutes)
 app.use('/api/users', userRoutes)
 
 // required code for deployment, to select build as static folder
+const __dirname = path.resolve()
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/frontend/build')))
 
