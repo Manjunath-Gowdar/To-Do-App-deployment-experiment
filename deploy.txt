@@ -1,0 +1,3 @@
+deployed on render.com
+at build command "npm install --prefix frontend && npm run build --prefix frontend"
+at start command "node backend/server.js"
