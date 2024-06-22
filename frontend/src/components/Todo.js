@@ -21,9 +21,10 @@ const Todo = ({ todo }) => {
     dispatch(userListTodos(todo.user))
     dispatch(userListTodos(todo.user))
   }
+
   return (
     <>
-      <form>
+      <form className="flex items-center justify-center space-x-2">
         <Link to={`/edit/${todo._id}/${todo.name}`}>
           <input
             className='placeholder-gray-600 font-sans border w-60 h-9 rounded-l-md p-2'
@@ -31,11 +32,11 @@ const Todo = ({ todo }) => {
             placeholder={todo.name}
           />
         </Link>
-        <button type='submit' onClick={handleStatus}>
+        <button type='submit' onClick={handleStatus} className="flex items-center justify-center">
           {todo.status ? (
             <svg
               xmlns='http://www.w3.org/2000/svg'
-              className='text-green-500 h-7  w-7'
+              className='text-green-500 h-7 w-7'
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
@@ -63,7 +64,7 @@ const Todo = ({ todo }) => {
           )}
         </button>
         <button
-          className=' text-pink-400  w-33 h-10 rounded-md p-1'
+          className='text-pink-400 h-10 rounded-md p-1 flex items-center justify-center'
           type='submit'
           onClick={handleRemove}>
           <svg
